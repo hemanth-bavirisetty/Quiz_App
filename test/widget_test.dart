@@ -10,12 +10,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 // ignore: unused_import
 import 'package:quiz_app/main.dart';
-import 'package:quiz_app/start_screen.dart';
+import 'package:quiz_app/quiz.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const StartScreen());
+    await tester.pumpWidget(const Quiz());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
