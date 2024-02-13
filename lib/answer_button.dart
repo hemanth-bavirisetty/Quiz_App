@@ -16,9 +16,10 @@ class AnswerButton extends StatelessWidget {
       margin: const EdgeInsets.all(5),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: const Color.fromARGB(255, 54, 4, 95),
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.all(20)),
+          backgroundColor: const Color.fromARGB(196, 144, 164, 174),
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.all(20),
+        ),
         onPressed: ontap,
         child: Text(
           answerText,

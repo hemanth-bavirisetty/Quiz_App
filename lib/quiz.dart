@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/questions_screen.dart';
+import 'package:quiz_app/results_screen.dart';
 import 'package:quiz_app/start_screen.dart';
 
 class Quiz extends StatefulWidget {
@@ -11,6 +13,7 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+  List<String> selectedAnswers = [];
   var activeScreen = 'start-screen';
 
   // @override
@@ -25,22 +28,57 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void restartQuiz() {
+    setState(
+      () {
+        selectedAnswers = [];
+        activeScreen = 'start-screen';
+      },
+    );
+  }
+
+  void chooseAnswer(String answer) {
+    selectedAnswers.add(answer);
+    if (selectedAnswers.length == questions.length) {
+      setState(() {
+        //selectedAnswers = [];
+        activeScreen = 'results-screen';
+      });
+    }
+  }
+
   @override
   Widget build(context) {
+    Widget screenWidget = StartScreen(switchScreen);
+
+    if (activeScreen == 'questions-screen') {
+      screenWidget = QuestionsScreen(
+        onSelectAnswer: chooseAnswer,
+      );
+    }
+
+    if (activeScreen == 'results-screen') {
+      screenWidget = ResultsScreen(
+        choosenAnswers: selectedAnswers,
+        retakeQuiz: restartQuiz,
+      );
+    }
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
             Color.fromARGB(255, 109, 58, 196),
-            Color.fromARGB(255, 128, 74, 220),
+            Color.fromRGBO(75, 33, 192, 1),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
       ),
-      child: activeScreen == 'start-screen'
-          ? StartScreen(switchScreen)
-          : const QuestionsScreen(),
+      child: screenWidget,
+      //activeScreen == 'start-screen'
+      //     ? StartScreen(switchScreen)
+      //     : QuestionsScreen(onSelectAnswer: chooseAnswer),
     );
   }
 }
