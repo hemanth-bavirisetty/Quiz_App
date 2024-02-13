@@ -37,7 +37,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             Text(
               currentQuestion.text,
               style: GoogleFonts.notoSans(
-                color: Color.fromARGB(216, 209, 196, 223),
+                color: const Color.fromARGB(216, 209, 196, 223),
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
